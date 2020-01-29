@@ -6,7 +6,7 @@ Created on Tue Jan 28 10:23:09 2020
 """
 
 import requests
-import json
+
 
 ## Get username
 #print('Enter your username: ')
@@ -21,27 +21,11 @@ print()
 
 # call API to get repository information
 resp = requests.get('https://api.github.com/repos/' + username + '/' + repo_name + '/issues/events')
-# if resp.status_code != 200:
-#     # This means something went wrong
-#     raise ApiError('GET /repos/' + username + '/' + repo_name + ' {}'.format(resp.status_code))
+
 
 # Extract resp JSON to response variable
 json_response = resp.json()
 
-# final_response = json.dumps(json_response) 
-# # print(type(final_response))
-# print(final_response)
-
-# json_response = resp.json()
-# final_response = json.load(json_response)
-# print(type(final_response))
-# print(final_response)
-# Loop through each JSON object and verify if 'id' or 'name' are present
-# for k, v in response.items():
-#     if k == 'id':
-#         print(k + ' = ' + str(v))
-#     if k == 'name':
-#         print(k + ' = ' + str(v))
 
 for item in json_response:    
     for k, v in item.items():
