@@ -27,7 +27,7 @@ resp = requests.get('https://api.github.com/repos/' + username + '/' + repo_name
 
 # Extract resp JSON to response variable
 json_response = resp.json()
-final_response = json_response[0]
+
 # final_response = json.dumps(json_response) 
 # # print(type(final_response))
 # print(final_response)
@@ -43,31 +43,36 @@ final_response = json_response[0]
 #     if k == 'name':
 #         print(k + ' = ' + str(v))
 
-for k, v in final_response.items():
-    if k == 'id':
-        print('Issues')
-        print(k + ' = ' + str(v))
-    if k == 'issue':
-        issue = v
-        print()
-        print('Issue Information')
-        for k, v in issue.items():
-            if k == 'number':
-                issue_id = v
-                print('Issue ID: ' + str(issue_id))
-                issue_response = requests.get('https://api.github.com/repos/' + username + '/' + repo_name + '/issues/' + str(issue_id))
-                issue_response_json = issue_response.json()
-                #print(issue_response_json)
-                for k, v in issue_response_json.items():
-                    if k == 'title':
-                        print('Issue Title: ' + v)
-                    if k == 'state':
-                        print('Issue State: ' + v)
-                    if k == 'pull_request':
-                        print('Issue Pull Request: ' + str(v['url']))
-                    if k == 'body':
-                        print('Issue Body: ' + v)
-                        
+for item in json_response:    
+    for k, v in item.items():
+        if k == 'id':
+            print('Issues')
+            print(k + ' = ' + str(v))
+        if k == 'issue':
+            issue = v
+            print()
+            print('Issue Information')
+            for k, v in issue.items():
+                if k == 'number':
+                    issue_id = v
+                    print('Issue ID: ' + str(issue_id))
+                    issue_response = requests.get('https://api.github.com/repos/' + username + '/' + repo_name + '/issues/' + str(issue_id))
+                    issue_response_json = issue_response.json()
+                    #print(issue_response_json)
+                    for k, v in issue_response_json.items():
+                        if k == 'title':
+                            print('Issue Title: ' + v)
+                        if k == 'state':
+                            print('Issue State: ' + v)
+                        if k == 'pull_request':
+                            print('Issue Pull Request: ' + str(v['url']))
+                        if k == 'created_at':
+                            print('Created at: ' + v)
+                        if k == 'closed_at':
+                            print('Completed at: ' + v)
+                        if k == 'body':
+                            print('Issue Body: ' + v)
+                            
 
 
     
