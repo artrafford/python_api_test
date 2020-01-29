@@ -50,12 +50,17 @@ for item in json_response:
                             print('Issue State: ' + v)
                         if k == 'pull_request':
                             print('Issue Pull Request: ' + str(v['url']))
+                            pr_url = str(v['url'])
+                            review_response = requests.get(pr_url + '/comments')
+                            review_response_json = review_response.json()
+                            print(review_response_json)
                         if k == 'created_at':
                             print('Created at: ' + v)
                         if k == 'closed_at':
                             print('Completed at: ' + v)
                         if k == 'body':
                             print('Issue Body: ' + v)
+                        
                             
 
 
