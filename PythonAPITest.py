@@ -53,7 +53,7 @@ for item in json_response:
                             pr_url = str(v['url'])
                             review_response = requests.get(pr_url + '/comments')
                             review_response_json = review_response.json()
-                            print('Review Comments' + review_response_json)
+                            print('Review Comments' + str(review_response_json))
                         if k == 'created_at':
                             print('Created at: ' + v)
                         if k == 'closed_at':
